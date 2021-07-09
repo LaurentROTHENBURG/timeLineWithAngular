@@ -1,10 +1,28 @@
 <div id="containerDateForm">
-  <label for="dateForm">
-  </label>
-  <input id="dateForm" placeholder="Entrez une date" type="number" formControlName="date">
-
-  <button id="buttonDeviner" type="submit">DEVINER</button>
+    <form [formGroup]="guessForm" (ngSubmit)="guessCard()">
+      <input id="carteADeviner" type="text" placeholder="Entrez la date" required="true" formControlName="formDate">
+      <button type="submit"> DEVINER</button>
+    </form>
 </div>
 
-<h2>Carte à deviner</h2>
 
+<div id="containerCard">
+  <div *ngIf="guessingCard">
+    <h2>Carte à deviner</h2>
+    <h3>{{guessingCard.name}}</h3>
+    <img src="{{guessingCard.imageUrl}}" alt="{{guessingCard.date}}">
+    <p>{{guessingCard.description}}</p>
+    <p>{{guessingCard.date}}</p>
+  </div>
+
+  <!-- Une section avec la liste des cartes déjà devinées -->
+  <h2>Cartes déjà devinées</h2>
+
+  <!-- Une ngFor pour afficher toutes les cartes déjà devinées -->
+  <div *ngFor="let guessedCard of cardsAlreadyGuessed">
+    <h3>{{guessedCard.name}}</h3>
+    <img src="{{guessedCard.imageUrl}}" alt="{{guessedCard.date}}">
+    <h3>{{guessedCard.description}}</h3>
+  </div>
+
+</div>

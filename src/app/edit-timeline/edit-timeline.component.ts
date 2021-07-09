@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CardService} from "../services/card.service";
 
 @Component({
   selector: 'app-edit-timeline',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTimelineComponent implements OnInit {
 
-  constructor() { }
+  cards = this.cardService.getAllCards();
+
+  constructor(private cardService: CardService) { }
 
   ngOnInit(): void {
   }

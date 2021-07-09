@@ -19,23 +19,27 @@
   </thead>
 
   <tbody>
-  <tr>
-    <td>1</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <tr *ngFor="let timeLine of timeLines | async">
+    <td>{{timeLine.id}}</td>
+    <td>{{timeLine.name}}</td>
+    <td>{{timeLine.category}}</td>
+    <td>{{timeLine.creationDate}}</td>
+    <td>{{timeLine.updateDate}}</td>
     <td></td>
     <td>
-      <a routerLinkActive="active" routerLink="/timeline-edit">Editer</a>
+      <a routerLinkActive="active" routerLink="/timeline-edit/{{timeLine.id}} ">Editer</a>
     </td>
     <td>
-      <a routerLinkActive="active" routerLink="/timeline-play">Jouer</a>
+      <a routerLinkActive="active" routerLink="/timeline-play/{{timeLine.id}}">Jouer</a>
     <td>
-      <button>Supprimer</button>
+      <button (click)="onDeleteTimeLine(timeLine.id)">
+        Supprimer
+      </button>
     </td>
   </tr>
   </tbody>
 </table>
+
+
 
 

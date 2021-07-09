@@ -9,12 +9,14 @@ import {RouterModule, Routes} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EditTimelineComponent } from './edit-timeline/edit-timeline.component';
 import {CardService} from "./services/card.service";
+import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './card/card.component';
 
 const appRoutes: Routes = [
   {path: '', component: GameBoardComponent},
   {path: 'timeline', component: GameBoardComponent},
-  {path: 'timeline-play', component: GameComponent},
-  {path: 'timeline-edit', component: EditTimelineComponent}
+  {path: 'timeline-play/:id', component: GameComponent},
+  {path: 'timeline-edit/:id', component: EditTimelineComponent}
 ];
 
 @NgModule({
@@ -23,9 +25,11 @@ const appRoutes: Routes = [
     GameBoardComponent,
     AddTimelineComponent,
     GameComponent,
-    EditTimelineComponent
+    EditTimelineComponent,
+    CardComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
