@@ -21,7 +21,7 @@ export class EditTimelineComponent implements OnInit {
   }
 
   addCard() {
-    console.log("Ajout")
+    console.log("Ajout de cartes")
   };
 
   addCardForm = this.formBuilder.group({

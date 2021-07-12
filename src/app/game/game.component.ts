@@ -69,10 +69,6 @@ export class GameComponent implements OnInit {
       window.alert('Tu peux recommencer');
       this.guessForm.reset();
     }
-    // et je remplis mon tableau de cartes déjà devinées guessedCards
-
-    // Sinon je dis au joueur que ce n'est pas gagné
-
 
   }
 }
