@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardService} from "../services/card.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'app-edit-timeline',
@@ -10,9 +12,27 @@ export class EditTimelineComponent implements OnInit {
 
   cards = this.cardService.getAllCards();
 
-  constructor(private cardService: CardService) { }
+  constructor(private cardService: CardService,
+              private formBuilder: FormBuilder) {
+  }
+
+  onDeleteCardById(id: number | any) {
+    this.cardService.onDeleteCardById(id);
+  }
+
+  addCard() {
+    console.log("Ajout")
+  };
+
+  addCardForm = this.formBuilder.group({
+    formName: '',
+    formDateCreation:'',
+    formUrl:'',
+    formDescription:''
+  });
 
   ngOnInit(): void {
+
   }
 
 }

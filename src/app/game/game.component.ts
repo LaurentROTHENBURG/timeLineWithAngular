@@ -16,23 +16,36 @@ export class GameComponent implements OnInit {
               private cardService: CardService,
               private route: ActivatedRoute) {
   }
-
-//Création des cartes
+//Tableau des cartes à deviner
   cardsToGuess: Card[] = [];
+// carte à deviner
   guessingCard: Card | undefined;
-  cardsAlreadyGuessed: Card[] = [];
+//Tableau des cartes déjà devinées
+  cardsAlreadyGuessed: Card[] = [].sort();
+
+  //fonction pour identifier un id aléatoirement
+  getIdRandom(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1)) + min;
+  }
 
 
   ngOnInit(): void {
-    //Affichage des cartes en fonction de l'id de la route
+
+     //Affichage des cartes en fonction de l'id de la route
     const routeParams = this.route.snapshot.paramMap;
     const timeLineIdFromRoute = Number(routeParams.get('id'));
 
     this.cardService.getCardsByTimeLine(timeLineIdFromRoute).subscribe(cardList => {
-      // stocker les cartes a deviner
+
+      let cardId = this.getIdRandom(0,22);
+      console.log(cardId);
+      // Cartes a deviner
       this.cardsToGuess = cardList;
-      // c'est la dernière carte du tableau qui est proposée
-      this.guessingCard = this.cardsToGuess.pop();
+      //La dernière carte du tableau  est proposée
+     // this.guessingCard = this.cardsToGuess.pop();
+      this.guessingCard = this.cardsToGuess[cardId];
     });
   }
 
@@ -41,7 +54,6 @@ export class GameComponent implements OnInit {
     formDate: ''
   });
 
-  // une fonction "deviner"
   guessCard() {
     //affichage de la date saisie
     //console.log(this.guessForm.get("formDate")?.value);
@@ -51,6 +63,10 @@ export class GameComponent implements OnInit {
     if (this.guessForm.get("formDate")?.value === this.guessingCard?.date.toString().substr(0, 4)) {
       this.cardsAlreadyGuessed.push(this.guessingCard as Card);
       this.guessingCard = this.cardsToGuess.pop();
+      this.guessForm.reset();
+    }
+    else{
+      window.alert('Tu peux recommencer');
       this.guessForm.reset();
     }
     // et je remplis mon tableau de cartes déjà devinées guessedCards

@@ -20,4 +20,8 @@ export class CardService {
     return this.http.get<Card[]>(this.baseAPIUrl + "/api/timeline/"+ timeLineId +"/card");
   }
 
+  onDeleteCardById(cardId: number){
+    this.http.delete(this.baseAPIUrl + "/api/timeline/" + 1 +"/card/" + cardId).subscribe();
+  }
+
 }

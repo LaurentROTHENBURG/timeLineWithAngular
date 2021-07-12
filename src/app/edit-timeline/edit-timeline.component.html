@@ -1,8 +1,28 @@
-<h2>Liste des cartes</h2>
+<h2>Détail du Timeline</h2>
 
-<div id="containerBtnAddTimeline">
-  <app-add-timeline></app-add-timeline>
+<h2>Edition d'une carte</h2>
+
+<div id = "formulaire">
+<form [formGroup]="addCardForm" (ngSubmit)="addCard()">
+  <label for="name">Nom :</label>
+  <input  id="name" type="text" name="name"  required formControlName="formName">
+
+  <label for="dateCreation">Date de Creation :</label>
+  <input  id="dateCreation" type="date" name="dateCreation"  required formControlName="formDateCreation">
+
+  <label for="url">URL :</label>
+  <input  id="url" type="text" name="url"  required formControlName="formUrl">
+
+  <label for="description">Description :</label>
+  <input  id="description" type="date" name="description"  required formControlName="formDescription">
+
+  <button type="submit"> Sauver la carte</button>
+
+</form>
+
 </div>
+
+<h2>Liste des cartes</h2>
 
 
 <table>
@@ -14,13 +34,12 @@
     <th>URL d'image</th>
     <th>Description</th>
     <th>Editer ?</th>
-    <th>Jouer !</th>
     <th>Supprimer ?</th>
   </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor = "let card of cards | async" >
+  <tr *ngFor="let card of cards | async">
     <td>{{card.id}}</td>
     <td>{{card.name}}</td>
     <td>{{card.date}}</td>
@@ -30,9 +49,7 @@
       <a routerLinkActive="active" routerLink="/timeline-edit">Editer</a>
     </td>
     <td>
-      <a routerLinkActive="active" routerLink="/timeline-play">Jouer</a>
-    <td>
-      <button>Supprimer</button>
+      <button (click)="onDeleteCardById(card.id)">Supprimer</button>
     </td>
   </tr>
   </tbody>
